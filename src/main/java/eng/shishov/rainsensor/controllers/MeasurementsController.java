@@ -1,6 +1,7 @@
 package eng.shishov.rainsensor.controllers;
 
 import eng.shishov.rainsensor.dto.MeasurementDTO;
+import eng.shishov.rainsensor.dto.MeasurementsList;
 import eng.shishov.rainsensor.models.Measurement;
 import eng.shishov.rainsensor.services.MeasurementsService;
 import eng.shishov.rainsensor.util.MeasurementInsertionErrorResponse;
@@ -30,8 +31,8 @@ public class MeasurementsController {
         this.measurementValidator = measurementValidator;
     }
     @GetMapping()
-    public List<MeasurementDTO> showAll() {
-        return measurementsService.findAll().stream().map(this::convertToMeasurementDTO).toList();
+    public MeasurementsList showAll() {
+        return new MeasurementsList(measurementsService.findAll().stream().map(this::convertToMeasurementDTO).toList());
     }
     @GetMapping("/rainyDaysCount")
     public Long rainyDaysCount() {
